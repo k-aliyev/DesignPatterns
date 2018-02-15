@@ -14,26 +14,26 @@ namespace Decorator
             HumanWarriorDecorator warrior = new HumanWarriorDecorator();
             HumanSwordbeardDecorator swordbeard = new HumanSwordbeardDecorator();
 
-            h.Move();
+            Console.WriteLine("Move: "+h.Move());
             warrior.SetComponent(h);
-            warrior.Move();
+            Console.WriteLine("Move: " + warrior.Move());
 
             //swordbeard.SetComponent(h);//Error, component must be warrior(h - human)
             swordbeard.SetComponent(warrior);//No Error
-            swordbeard.Move();
+            Console.WriteLine("Move: " + swordbeard.Move());
 
 
             Elf e = new Elf();
             ElfWarriorDecorator elfWarrior = new ElfWarriorDecorator();
             ElfCrossbowmanDecorator crossbowman = new ElfCrossbowmanDecorator();
 
-            e.Move();
+            Console.WriteLine("Move: " + e.Move());
             elfWarrior.SetComponent(e);
-            elfWarrior.Move();
+            Console.WriteLine("Move: " + elfWarrior.Move());
 
             //crossbowman.SetComponent(h);//Error, component must be elfWarrior(e - elf)
             crossbowman.SetComponent(elfWarrior);//No Error
-            crossbowman.Move();
+            Console.WriteLine("Move: " + crossbowman.Move());
         }
     }
 }

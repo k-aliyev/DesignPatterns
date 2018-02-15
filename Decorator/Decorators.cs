@@ -14,12 +14,13 @@ namespace Decorator
 
         protected abstract void SetProperties();
 
-        public override void Move()
+        public override int Move()
         {
             if (component != null)
             {
-                component.Move();
+                return component.Move();
             }
+            return 0;
         }
 
         public void Print()
@@ -37,7 +38,7 @@ namespace Decorator
     {
         public override void SetComponent(Component component)
         {
-            if(component is Human)
+            if (component is Human)
             {
                 this.component = component;
                 SetProperties();
@@ -48,16 +49,16 @@ namespace Decorator
             }
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed + component.Move();
         }
         protected override void SetProperties()
         {
-            Attack = component.Attack + 20;
-            Speed = component.Speed + 10;
-            Health = component.Health + 50;
-            Protection = component.Protection + 20;
+            Attack = 20;
+            Speed = 10;
+            Health = 50;
+            Protection = 20;
         }
     }
 
@@ -76,16 +77,16 @@ namespace Decorator
             }
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed + component.Move();
         }
         protected override void SetProperties()
         {
-            Attack = component.Attack + 40;
-            Speed = component.Speed - 10;
-            Health = component.Health + 50;
-            Protection = component.Protection + 40;
+            Attack = 40;
+            Speed = -10;
+            Health = 50;
+            Protection = 40;
         }
     }
 
@@ -104,16 +105,16 @@ namespace Decorator
             }
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed + component.Move();
         }
         protected override void SetProperties()
         {
-            Attack = component.Attack + 20;
-            Speed = component.Speed + 20;
-            Health = component.Health + 50;
-            Protection = component.Protection + 10;
+            Attack = 20;
+            Speed = 20;
+            Health = 50;
+            Protection = 10;
         }
     }
 
@@ -132,16 +133,16 @@ namespace Decorator
             }
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed + component.Move();
         }
         protected override void SetProperties()
         {
-            Attack = component.Attack - 10;
-            Speed = component.Speed + 40;
-            Health = component.Health + 200;
-            Protection = component.Protection + 100;
+            Attack = -10;
+            Speed = 40;
+            Health = 200;
+            Protection = 100;
         }
     }
 
@@ -160,16 +161,16 @@ namespace Decorator
             }
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed + component.Move();
         }
         protected override void SetProperties()
         {
-            Attack = component.Attack + 20;
-            Speed = component.Speed - 10;
-            Health = component.Health + 100;
-            Protection = component.Protection + 20;
+            Attack = 20;
+            Speed = -10;
+            Health = 100;
+            Protection = 20;
         }
     }
 
@@ -188,16 +189,16 @@ namespace Decorator
             }
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed + component.Move();
         }
         protected override void SetProperties()
         {
-            Attack = component.Attack + 10;
-            Speed = component.Speed + 10;
-            Health = component.Health - 50;
-            Protection = component.Protection + 10;
+            Attack = 10;
+            Speed = 10;
+            Health = -50;
+            Protection = 10;
         }
     }
 
@@ -216,16 +217,16 @@ namespace Decorator
             }
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed + component.Move();
         }
         protected override void SetProperties()
         {
-            Attack = component.Attack + 10;
-            Speed = component.Speed + 10;
-            Health = component.Health + 50;
-            Protection = component.Protection - 10;
+            Attack = 10;
+            Speed = 10;
+            Health = 50;
+            Protection = -10;
         }
     }
 
@@ -244,16 +245,16 @@ namespace Decorator
             }
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed + component.Move();
         }
         protected override void SetProperties()
         {
-            Attack = component.Attack + 70;
-            Speed = component.Speed + 20;
-            Health = component.Health + 0;
-            Protection = component.Protection + 0;
+            Attack = 70;
+            Speed = 20;
+            Health = 0;
+            Protection = 0;
         }
     }
 
@@ -272,16 +273,16 @@ namespace Decorator
             }
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed + component.Move();
         }
         protected override void SetProperties()
         {
-            Attack = component.Attack + 50;
-            Speed = component.Speed + 30;
-            Health = component.Health + 100;
-            Protection = component.Protection + 30;
+            Attack = 50;
+            Speed = 30;
+            Health = 100;
+            Protection = 30;
         }
     }
 

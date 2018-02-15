@@ -8,12 +8,12 @@ namespace Decorator
 {
     abstract class Component
     {
-        public int Attack { get;  set; }
-        public int Speed { get;  set; }
-        public int Health { get;  set; }
-        public int Protection { get;  set; }
+        public int Attack { get; set; }
+        public int Speed { get; set; }
+        public int Health { get; set; }
+        public int Protection { get; set; }
 
-        public abstract void Move();
+        public abstract int Move();
     }
 
     class Human : Component
@@ -26,9 +26,9 @@ namespace Decorator
             Protection = 0;
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed;
         }
     }
 
@@ -42,9 +42,9 @@ namespace Decorator
             Protection = 0;
         }
 
-        public override void Move()
+        public override int Move()
         {
-            Console.WriteLine($"Moved with speed: {Speed}");
+            return Speed;
         }
     }
 }
