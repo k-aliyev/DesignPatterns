@@ -13,7 +13,7 @@ namespace Command.cs
     public partial class Form1 : Form
     {
         Invoker invoker;
-        List<Button> buttons = new List<Button>(); 
+        List<Button> buttons = new List<Button>();
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +27,10 @@ namespace Command.cs
             buttons.Add(button7);
             buttons.Add(button8);
             buttons.Add(button9);
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                buttons[i].BackColor = Color.White;
+            }
 
         }
 
@@ -80,52 +84,96 @@ namespace Command.cs
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Pressed(button1);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Pressed(button2);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
 
+            Pressed(button3);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
 
+            Pressed(button4);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
 
+            Pressed(button5);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
 
+            Pressed(button6);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
 
+            Pressed(button7);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-
+            Pressed(button8);
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-
+            Pressed(button9);
         }
 
-        private void Pressed()
+        private void Pressed(Button button)
+        {
+            if (button.BackColor == Color.White)
+            {
+                button.BackColor = Color.Black;
+            }
+            else
+            {
+                button.BackColor = Color.White;
+            }
+            invoker.AddCommand(GetCommand());
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
             invoker.AddCommand(GetCommand());
+        }
+
+        private void button_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Z)
+            {
+                try
+                {
+                    SetCommand(invoker.Undo());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Y)
+            {
+                try
+                {
+                    SetCommand(invoker.Redo());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }
