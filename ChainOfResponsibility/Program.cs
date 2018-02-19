@@ -10,9 +10,18 @@ namespace ChainOfResponsibility
     {
         static void Main(string[] args)
         {
-            Logger l = new Logger("k.aliyev.1234@gmail.com");
-            l.Exeption(101);
+            Logger ml = new MailLogger();
+            Logger fl = new FileLogger(ml as MailLogger);
+            Logger cl = new ConsoleLogger(fl as FileLogger); 
 
+            try
+            {
+                throw  new ErrorException("Oh Fuck!", "someone@gmail.com", TypeError.Critacal);
+            }
+            catch (Exception ex)
+            {
+                cl.Log(ex);
+            }
         }
     }
 }

@@ -4,35 +4,65 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using System.IO;
 
 namespace ChainOfResponsibility
 {
-    class Logger
+    abstract class Logger
     {
-        SmallErrorException simErr;
-        ErrorException midErr;
-        CritacalErrorException criErr;
+        public abstract void Log(Exception ex);
+    }
 
-        public Logger(string mail) {
-            simErr = new SmallErrorException("request is between 0 and 10!");
-            midErr = new ErrorException("request is between 11 and 100!!");
-            criErr = new CritacalErrorException("request is more than 100!!!", mail);
+    class ConsoleLogger : Logger
+    {
+        FileLogger logger;
+
+        public ConsoleLogger(FileLogger logger)
+        {
+            this.logger = logger;
         }
 
-        public void Exeption(int request)
+        public override void Log(Exception ex)
         {
-            if (request >= 0 && request < 10)
+            Console.WriteLine(ex.Message);
+            if((ex as ErrorException).GetErrorType() != TypeError.Small)
             {
-                simErr.Error();
+                logger.Log(ex);
             }
-            else if (request >= 10 && request < 100) 
+        }
+    }
+
+
+
+    class FileLogger : Logger
+    {
+        MailLogger logger;
+
+        public FileLogger(MailLogger logger)
+        {
+            this.logger = logger;
+        }
+
+        public override void Log(Exception ex)
+        {
+            Console.WriteLine("Recording to File: Error.txt");
+            File.AppendAllText("Error.txt", ex.Message);
+            if ((ex as ErrorException).GetErrorType() != TypeError.Middle)
             {
-                midErr.Error();
+                logger.Log(ex);
             }
-            else if (request >= 100)
-            {
-                criErr.Error();
-            }
+        }
+    }
+
+    class MailLogger : Logger
+    {
+        public MailLogger()
+        {
+        }
+
+        public override void Log(Exception ex)
+        {
+            Console.WriteLine($"Sending mail to:{(ex as ErrorException).GetMail()}");           
         }
     }
 }
